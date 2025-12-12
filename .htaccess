@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Remove .html or .php from URLs (redirect)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.(html|php)[\s?]
+RewriteRule ^ %1 [R=301,L]
+
+# Serve matching .php OR .html file
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+AddType application/x-httpd-php .HTML
